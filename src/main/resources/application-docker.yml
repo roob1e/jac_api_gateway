@@ -1,0 +1,3 @@
+services:
+  auth-url: ${AUTH_SERVICE_URL}
+  user-url: ${USER_SERVICE_URL}

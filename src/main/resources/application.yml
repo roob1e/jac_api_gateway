@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    default: local
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: ${services.auth-url}
+              predicates:
+                - Path=/api/auth/**
+            - id: user-service
+              uri: ${services.user-url}
+              predicates:
+                - Path=/api/users/**,/api/cards/**
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${services.auth-url}/.well-known/jwks.json
